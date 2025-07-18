@@ -39,14 +39,14 @@ export default function Header() {
             <button 
             onClick={handleMenuUserClick}
             onBlur={(e) => {setStateMenuUser(false)}}
-                className=" flex relative items-center justify-center dark:text-[#232227] dark:bg-[#ffffff60] rounded-full py-2 w-10 h-10 ">
+                className=" flex relative items-center justify-center dark:text-[#232227]  dark:bg-[#ffffff60] rounded-full py-2 w-10 h-10 ">
                 <User color="currentColor" height={30} width={30}/>
-                <div className={`absolute mt-10 flex flex-col text-[#ffffff80] duration-200 w-50 
-                    text-right top-full overflow-hidden right-0 bg-[#222125] origin-top rounded-2xl shadow-md
+                <div className={`absolute mt-10 flex flex-col dark:text-[#ffffff80] duration-200 w-50 
+                    text-right bg-white text-[#000000] top-full overflow-hidden right-0 dark:bg-[#222125] origin-top rounded-2xl shadow-md
                     ${stateMenuUser ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0"}`}>
-                    <a href="" className="hover:bg-[#ffffff10] transition-all duration-300 px-3 py-2 w-full">Mi perfil</a>
-                    <a href="" className="hover:bg-[#ffffff10] transition-all duration-300 px-3 py-2 w-full">Ajustes</a>
-                    <a href="" className="hover:bg-[#ffffff10] transition-all duration-300 px-3 py-2 w-full">Cerrar sesión</a>
+                    <a href="" className="dark:hover:bg-[#ffffff10] hover:bg-[#9f9f9f] transition-all duration-300 px-3 py-2 w-full">Mi perfil</a>
+                    <a href="" className="dark:hover:bg-[#ffffff10] hover:bg-[#9f9f9f] transition-all duration-300 px-3 py-2 w-full">Ajustes</a>
+                    <a href="" className="dark:hover:bg-[#ffffff10] hover:bg-[#9f9f9f] transition-all duration-300 px-3 py-2 w-full">Cerrar sesión</a>
                 </div>
             </button>
         </div> 

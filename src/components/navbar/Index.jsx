@@ -20,7 +20,7 @@ function NavBar(){
     
   
     return(
-        <aside className={`fixed left-0 w-60 text-12 dark:text-[#ffffff80] text-[#00000080]  dark:bg-[#1e1e22] 
+        <aside className={`fixed left-0 backdrop-blur-md w-60 text-12 dark:text-[#ffffff80] text-[#00000080]  dark:bg-[#1e1e22] 
        bg-[#ffffff90] top-18  h-full border-r-2 z-2 border-[#00000030]
         transform transition-transform duration-300 ${isOpen 
         ? 'translate-x-0'     

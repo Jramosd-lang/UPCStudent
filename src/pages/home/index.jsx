@@ -162,7 +162,7 @@ function Home() {
                 <h1 className="bg-[#64d17124] w-fit py-2 px-4 border border-[#64d171] rounded-3xl">
                 Bienvenido a <span className="text-[#64d171]">UPCStudent</span>
                 </h1>
-                <p className="w-[30ch] max-w-[100%] text-3xl">
+                <p className="w-[30ch] max-w-[100%] text-[#45454d] text-3xl">
                     Tu página para <span className=" text-[#64d171]">conectar</span> con otros estudiantes de la <span className="text-[#64d171]">UPC</span> y tu aliado de confianza
                 </p>
                 <button className="bg-[#36f04f] text-white w-52 py-2 px-4 border-2 rounded-3xl">
