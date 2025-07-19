@@ -7,3 +7,26 @@ body, html{
 
 }
 
+@layer utilities {
+  @keyframes spring-left {
+    0% {
+      padding-left: 16px; /* pl-4 */
+    }
+    40% {
+      padding-left: 50px;
+    }
+    65% {
+      padding-left: 42px;
+    }
+    80% {
+      padding-left: 48px;
+    }
+    100% {
+      padding-left: 50px;
+    }
+  }
+
+  .animate-spring-left {
+    animation: spring-left 0.35s ease-out forwards;
+  }
+}

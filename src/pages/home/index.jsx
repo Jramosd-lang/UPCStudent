@@ -137,8 +137,6 @@ function Home() {
   return (
     <>
 
-        <Header />
-        <NavBar />
         <section className="relative flex gap-8 text-xl font-[700] dark:text-[#ffffff80] h-screen w-full justify-start items-center pl-[15%] dark:bg-[#00000080]">
             <div ref={calendaryRef} className="absolute top-[20%] left-[50%] z-[-1]">
                 <Calendar className="text-[#45454d] max-md:w-30 max-lg:h-30 w-35 h-35" />

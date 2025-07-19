@@ -1,7 +1,12 @@
-import { Search, User, Menu, Home } from "lucide-react";
-import { useState } from "react";
+import { Search, User, Home } from "lucide-react";
+import { useState} from "react";
+import {Link, useLocation} from "react-router-dom";
+import {Routes} from '../../routes/index';
+
 
 export default function Header() {
+
+    const path = useLocation().pathname;
 
     const [stateMenuUser, setStateMenuUser] = useState(false);
 
@@ -15,13 +20,13 @@ export default function Header() {
         <div className="flex items-center min-xl:w-[15%] max-sm:flex-col">
             <div className="flex items-center text-transparent bg-[#00000014] hover:bg-[#00000040] min-xl:hover:w-35 min-xl:hover:text-[#45454a] font-bold justify-end relative transition-all duration-300  max-lg:mr-5 h-15 w-15 rounded-4xl gap-2 pl-0 my-auto mr-auto">
                 <img src="/logo.png" alt="Logo" className="h-full w-15 p-2 object-contain absolute left-0" /> 
-                <h1 className="flex pr-[10%] gap-1"> <Home color="currentColor"/>Inicio</h1>
+                <Link to="/" className="flex pr-[10%] gap-1"> <Home color="currentColor"/>Inicio</Link>
             </div>
         </div>
         <div className="max-lg:hidden flex text-12 selection-none dark:text-[#ffffff80] font-[600] mx-auto max-md: text-center h-[100%] lg:gap-5 xl:gap-18 w-[35%] items-center justify-center ">
-            <a href="" className="rounded-4xl select-none p-2 hover:bg-[#00000032] hover:px-10 transition-all duration-300"><h1>Materias</h1></a>
-            <a href="" className="rounded-4xl select-none p-2 hover:bg-[#00000032] hover:px-10 transition-all duration-300"><h1>Emprendimientos</h1></a>
-            <a href="" className="rounded-4xl select-none p-2 hover:bg-[#00000032] hover:px-10 transition-all duration-300"><h1>Libros</h1></a>
+            <Link to={Routes[1].path} className={`rounded-4xl select-none p-2 hover:bg-[#00000032] hover:px-10 transition-all duration-300 ${path === Routes[1].path ? "bg-[#00000032] px-10" : ""}`}><p>Materias</p></Link>
+            <Link to={Routes[2].path} className={`rounded-4xl select-none p-2 hover:bg-[#00000032] hover:px-10 transition-all duration-300 ${path === Routes[2].path ? "bg-[#00000032] px-10" : ""}`}><p>Emprendimientos</p></Link>
+            <Link to={Routes[3].path} className={`rounded-4xl select-none p-2 hover:bg-[#00000032] hover:px-10 transition-all duration-300 ${path === Routes[3].path ? "bg-[#00000032] px-10" : ""}`}><p>Libros</p></Link>
         </div>
         <div className="flex items-center py-auto mr-auto justify-center min-w-fit ">
             <input type="text" className="bg-[#ffffff] dark:bg-transparent dark:border-[#ffffff40] w-[30vh] max-sm:w-[30vw] hover:border-[#00000080] border-l-2 border-t-2 border-b-2 border-r-2 border-[#bfbfbf] pl-8 text-gray-700 

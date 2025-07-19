@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {gsap} from 'gsap';
-import { useEffect, useRef } from 'react';
 import {Menu, Book, BadgeDollarSign, LibrarySquare, Calendar, X} from 'lucide-react'
 
 
@@ -28,13 +27,13 @@ function NavBar(){
       }`}>
             <ul className='flex flex-col items-start py-15 w-fullfont-semibold gap-0'>
                 <li className='flex cursor-pointer gap-2 pl-8 hover:pl-15 h-12 w-full 
-                transition-all duration-300 select-none hover:text-[#33a54e]'><Book/>Materias</li>
+                transition-all duration-350 select-none hover:text-[#33a54e]'><Book/>Materias</li>
                 <li className='flex cursor-pointer gap-2 pl-8 hover:pl-15 h-12 w-full 
-                transition-all duration-300 select-none hover:text-[#33a54e]'><BadgeDollarSign/>Emprendimientos</li>
+                transition-all duration-350 select-none ease hover:text-[#33a54e]'><BadgeDollarSign/>Emprendimientos</li>
                 <li className='flex cursor-pointer gap-2 pl-8 hover:pl-15 h-12 w-full 
-                transition-all duration-300 select-none hover:text-[#33a54e]'><LibrarySquare/>Libros</li>
+                transition-all duration-350 select-none ease hover:text-[#33a54e]'><LibrarySquare/>Libros</li>
                 <li className='flex cursor-pointer gap-2 pl-8 hover:pl-15 h-12 w-full 
-                transition-all duration-300 select-none hover:text-[#33a54e]'><Calendar/>Fechas</li>
+                transition-all duration-350 select-none ease hover:text-[#33a54e]'><Calendar/>Fechas</li>
             </ul>
             <button className="fixed left-65 top-4 border-2 border-[#00000040] flex items-center justify-center w-10 
             h-10 rounded-full bg-white hover:text-[#33a54e] shadow-2xl focus:outline-0 dark:bg-[#1e1e22] 
