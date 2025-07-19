@@ -1,5 +1,6 @@
 import NavBar from "../../components/navbar/Index";
 import Header from "../../components/header/Index";
+import Target from "../../components/target/index";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 import { Calendar, Coins, Wind, BookMarked, BookCheck, BookUser } from "lucide-react";
@@ -169,9 +170,11 @@ function Home() {
                     Fase BETA
                 </button>
             </div>
-            <div className="flex flex-col items-center max-lg:hidden justify-center gap-4 h-full w-[40%] dark:bg-[#0d0d0e]">
-                
-  
+            <div className="flex flex-col items-center max-lg:hidden justify-center gap-4 h-full w-[40%] dark:bg-[#19191c]">
+                <Target/>
+                <Target/>
+                <Target/>
+                <Target/>
             </div>
         </section>
 
