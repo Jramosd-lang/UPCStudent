@@ -3,8 +3,10 @@ import {Routes} from '../../routes/index';
 import { useLocation } from "react-router-dom";
 import  {X} from "lucide-react";
 import { useState } from "react";
+import {Carrers} from "../../lists/carrers.js"
 
 export default function Subjects() {
+    const names = Carrers.map(Carrers => Carrers.name);
     const location = useLocation();
     const isMaterias = location.pathname === Routes[1].path;
     const [windowInfo, setWindowInfo] = useState(true);
@@ -37,14 +39,6 @@ export default function Subjects() {
           </div>
           <div className='w-[80%] h-fit flex gap-4 text-[#919191] items-start justify-start'>
             <label htmlFor="Facultad">Facultad:</label>
-            <select list='' className='bg-[#ffffff10] border-2 border-[#ffffff30] rounded-lg px-4'>
-              <option value="Ingenieria">Ingenieria</option>
-              <option value="Arquitectura">Arquitectura</option>
-              <option value="Ciencias">Ciencias</option>
-              <option value="Ciencias de la Salud">Ciencias de la Salud</option>
-              <option value="Ciencias Sociales">Ciencias Sociales</option>
-            </select>
-
             <input type="text" className='bg-[#ffffff10] border-2 border-[#ffffff30] rounded-lg px-4' />
           </div>
         </div>
