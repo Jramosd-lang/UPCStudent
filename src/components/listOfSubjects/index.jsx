@@ -1,4 +1,5 @@
 import {List,Grid3x3} from 'lucide-react';
+import SubjectTarget from './subjectTarget/index.jsx';
 
 
 export default function ListOfSubjects() {
@@ -12,8 +13,28 @@ export default function ListOfSubjects() {
                 <button className='bg-[#0e0e10] rounded-md py-2 px-4 flex items-center justify-center gap-2 select-none'><Grid3x3/> Cuadrícula</button>
               </div>
             </div>
-            <div className='w-[90%] h-fit flex flex-col gap-5'>
-              {/* Aquí se mostrarían las materias filtradas */}
+            <div className="w-[95%] h-fit flex flex-col gap-4">
+              <SubjectTarget 
+                name="Programación de Computadores I"
+                codeSubject="CIC-101"
+                semester="1"
+                faculty="Facultad de Ingeniería y Arquitectura"
+                program="Ingeniería de Sistemas e Informática"
+              />
+              <SubjectTarget 
+                name="Matemáticas I"
+                codeSubject="MAT-101"
+                semester="1"
+                faculty="Facultad de Ciencias Básicas"
+                program="Ingeniería de Sistemas e Informática"
+              />
+              <SubjectTarget 
+                name="Física I"
+                codeSubject="FIS-101"
+                semester="1"
+                faculty="Facultad de Ciencias Básicas"
+                program="Ingeniería de Sistemas e Informática"
+              />
             </div>
           </div>
         

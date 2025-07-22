@@ -34,7 +34,7 @@ export default function Subjects() {
     <>
 
       <div className="flex flex-col items-center py-18 h-screen w-screen">
-        <div className="w-full h-18 pl-21 font-semibold text-[#b3b3b6] border-b-2 border-[#00000030] flex items-center justify-start">
+        <div className="w-full h-18 pl-21 py-8 font-semibold text-[#b3b3b6] border-b-2 border-[#00000030] flex items-center justify-start">
             <h1 >{isMaterias? "Materias" : ""}</h1>
         </div>
         <div className="flex flex-col py-10 gap-12 items-center justify-center w-full h-auto">
@@ -55,7 +55,7 @@ export default function Subjects() {
             <div className='flex w-full items-center justify-center text-[#888889]'>
                 <input type="text" className='w-[90%] select-none hover:outline-1 hover:outline-[#ffffff30] bg-[#0e0e10] py-5 px-5 rounded-2xl' placeholder='Buscar por codigo o nombre...' />
             </div>
-            <div className='flex items-center justify-start w-[90%] gap-3 mb-5 '>
+            <div className='flex items-center justify-start w-[90%] gap-3 mb-5 nowrap'>
               <div className='py-2 px-4 flex items-center justify-center bg-[#0e0e10] rounded-md select-none gap-2' ><Heart className='w-5 h-5 text-[#888889]' />Materias favoritas</div>
               <div className='py-2 px-4 flex items-center justify-center bg-[#0e0e10] rounded-md select-none gap-2 mr-auto'><RefreshCw className='w-5 h-5 text-[#888889]' /> Remover filtros</div>
               <button style={{ filter: "drop-shadow(0 0 6px #006d49)" }} className='py-2 px-4 flex font-semibold text-white items-center justify-center bg-[#006d49] rounded-md drop-shadow-lg drop-shadow-[#006d49] select-none gap-2'><Plus className='w-5 h-5 text-white' /> Aplicar filtros</button>

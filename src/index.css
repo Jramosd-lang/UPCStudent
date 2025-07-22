@@ -49,3 +49,11 @@ body, html{
     scrollbar-color: #222224 #18181b !important;
   }
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
