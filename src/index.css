@@ -29,4 +29,23 @@ body, html{
   .animate-spring-left {
     animation: spring-left 0.35s ease-out forwards;
   }
+  
+  .scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #a1a1aa #e5e7eb;
+  }
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #a1a1aa;
+  }
+  .scrollbar::-webkit-scrollbar-track {
+    background-color: #e5e7eb;
+  }
+
+  /* Scrollbar en modo oscuro */
+  .scrollbar-dark {
+    scrollbar-color: #222224 #18181b !important;
+  }
 }

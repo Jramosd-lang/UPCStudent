@@ -1,132 +1,156 @@
-// CustomListbox.jsx
-const StyledOption = React.memo(({ option, isSelected, isHighlighted, onClick, height = 40 }) => (
-  <div
-    className={`
-      flex items-center px-3 py-2 cursor-pointer transition-colors
-      ${isHighlighted ? 'bg-[#ffffff15]' : ''}
-      ${isSelected ? 'bg-[#ffffff20] font-medium' : 'hover:bg-[#ffffff10]'}
-      text-[#919191]
-    `}
-    style={{ height }}
-    onClick={() => onClick(option)}
-  >
-    <span className="flex-1 truncate">{option.label}</span>
-    {isSelected && <Check className="w-4 h-4 text-[#919191] ml-2 flex-shrink-0" />}
-  </div>
-));
+import { useState, useRef, useEffect } from "react";
+import { ChevronDown, Check } from "lucide-react";
 
-const CustomListbox = ({
+function CustomListBox({
   options = [],
   value,
-  onChange,
-  placeholder = "Seleccionar...",
+  defaultValue,
+  placeholder = "Selecciona una opción",
   disabled = false,
-  className = ""
-}) => {
+  onChange,
+  className = "",
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [highlightedIndex, setHighlightedIndex] = useState(-1);
-  const containerRef = useRef(null);
-
-  const selectedOption = useMemo(() =>
-    options.find(opt => opt.value === value), [options, value]);
-
-  const handleOptionClick = useCallback((option) => {
-    onChange?.(option.value, option);
-    setIsOpen(false);
-    setHighlightedIndex(-1);
-  }, [onChange]);
-
-  const handleToggle = useCallback(() => {
-    if (disabled) return;
-    setIsOpen((prev) => !prev);
-    setHighlightedIndex(-1);
-  }, [disabled]);
+  const [selectedValue, setSelectedValue] = useState(value || defaultValue || "");
+  const [focusedIndex, setFocusedIndex] = useState(-1);
+  const selectRef = useRef(null);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (value !== undefined) {
+      setSelectedValue(value);
+    }
+  }, [value]);
 
-    const handleKeyDown = (e) => {
-      switch (e.key) {
-        case 'ArrowDown':
-          e.preventDefault();
-          setHighlightedIndex(prev =>
-            prev < options.length - 1 ? prev + 1 : prev
-          );
+  const selectedOption = options.includes(selectedValue) ? selectedValue : null;
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setIsOpen(false);
+        setFocusedIndex(-1);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Manejar navegación con teclado
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (!isOpen || options.length === 0) return;
+
+      switch (event.key) {
+        case "ArrowDown":
+          event.preventDefault();
+          setFocusedIndex((prev) => prev < options.length - 1 ? prev + 1 : 0);
           break;
-        case 'ArrowUp':
-          e.preventDefault();
-          setHighlightedIndex(prev => prev > 0 ? prev - 1 : prev);
+        case "ArrowUp":
+          event.preventDefault();
+          setFocusedIndex((prev) => prev > 0 ? prev - 1 : options.length - 1);
           break;
-        case 'Enter':
-          e.preventDefault();
-          if (highlightedIndex >= 0) {
-            handleOptionClick(options[highlightedIndex]);
+        case "Enter":
+        case " ":
+          event.preventDefault();
+          if (focusedIndex >= 0) {
+            handleSelect(options[focusedIndex]);
           }
           break;
-        case 'Escape':
+        case "Escape":
           setIsOpen(false);
+          setFocusedIndex(-1);
           break;
       }
-    };
+    }
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, highlightedIndex, options, handleOptionClick]);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, focusedIndex, options]);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleClickOutside = (e) => {
-      if (containerRef.current && !containerRef.current.contains(e.target)) {
-        setIsOpen(false);
+  const handleSelect = (optionValue) => {
+    setSelectedValue(optionValue);
+    setIsOpen(false);
+    setFocusedIndex(-1);
+    if (onChange) {
+      onChange(optionValue);
+    }
+  };
+
+  const toggleDropdown = () => {
+    if (!disabled) {
+      setIsOpen(!isOpen);
+      if (!isOpen) {
+        setFocusedIndex(-1);
       }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isOpen]);
+    }
+  };
 
   return (
-    <div ref={containerRef} className={`relative w-full ${className}`}>
-      <button
-        type="button"
-        onClick={handleToggle}
-        disabled={disabled}
-        tabIndex={0}
+    <div ref={selectRef} className={`relative inline-block w-full ${className}`}>
+      {/* Trigger */}
+      <div
+        role="combobox"
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        tabIndex={disabled ? -1 : 0}
+        onClick={toggleDropdown}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggleDropdown();
+          }
+        }}
         className={`
-          w-full px-4 py-2 text-left bg-[#ffffff10] border-2 border-[#ffffff30] rounded-lg
-          flex items-center justify-between transition-colors text-[#919191]
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#ffffff15] hover:border-[#ffffff40]'}
-          ${isOpen ? 'border-[#ffffff40] bg-[#ffffff15]' : ''}
+          flex items-center justify-between w-full outline-0 rounded-md cursor-pointer
+          transition-all h-7 duration-200 ease-in-out ouline-[#ffffff30]
+          bg-[#0e0e10] text-[#888889] hover:outline-1 
+          px-4 py-1 text-base font-medium
+          ${disabled ? "opacity-50 cursor-not-allowed" : ""}
+          ${isOpen ? "ring-2 ring-[#181b21] ring-opacity-50 " : ""}
         `}
       >
-        <span className={`truncate ${selectedOption ? 'text-[#919191]' : 'text-[#666]'}`}>
-          {selectedOption?.label || placeholder}
+        <span className={`select-none truncate ${selectedOption ? "text-[#888889]" : "text-[#919191]"}`}>
+          {selectedOption || placeholder}
         </span>
-        <ChevronDown className={`w-4 h-4 text-[#919191] transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-      </button>
+        <ChevronDown
+          className={`w-6 h-6 text-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+        />
+      </div>
 
+      {/* Dropdown */}
       {isOpen && (
-        <div className="absolute z-50 w-full mt-1 bg-[#00000025] border-2 border-[#ffffff30] rounded-lg shadow-lg backdrop-blur-sm">
-          <div className="max-h-48 overflow-y-auto">
-            {options.length === 0 ? (
-              <div className="px-3 py-2 text-[#666] text-center">
-                No hay opciones disponibles
+        <div
+          role="listbox"
+          className="scrollbar-dark absolute z-50 w-full mt-1 bg-[#00000030] backdrop-blur-sm select-none border border-[#ffffff30] 
+          rounded-md shadow-lg max-h-60 overflow-auto"
+        >
+          {options.length === 0 ? (
+            <div className="px-4 py-3 text-[#919191] text-sm">
+              No hay opciones disponibles
+            </div>
+          ) : (
+            options.map((option, index) => (
+              <div
+                key={option}
+                role="option"
+                aria-selected={option === selectedValue}
+                onClick={() => handleSelect(option)}
+                onMouseEnter={() => setFocusedIndex(index)}
+                className={`
+                  flex items-center justify-between px-4 py-3 cursor-pointer transition-colors duration-150
+                  text-base text-white hover:bg-[#00000052]
+                  ${focusedIndex === index ? "bg-[#00000052]" : ""}
+                  ${option === selectedValue ? "bg-[#00000070]" : ""}
+                `}
+              >
+                <span className="truncate">{option}</span>
+                {option === selectedValue && <Check className="w-5 h-5 text-white" />}
               </div>
-            ) : (
-              options.map((option, index) => (
-                <StyledOption
-                  key={option.value}
-                  option={option}
-                  isSelected={option.value === value}
-                  isHighlighted={index === highlightedIndex}
-                  onClick={handleOptionClick}
-                />
-              ))
-            )}
-          </div>
+            ))
+          )}
         </div>
       )}
     </div>
   );
-};
-
-export default CustomListbox;
+}
+export default CustomListBox;

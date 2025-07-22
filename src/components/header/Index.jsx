@@ -37,7 +37,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center  pl-5 justify-center  gap-5">
-            <button className="bg-[#6abf5b] font-semibold max-sm:hidden text-white dark:text-[#232227] hover:bg-[#60a969] transition-all duration-300 rounded-full py-2 px-4
+            <button style={{ filter: "drop-shadow(0 0 6px #006d49)" }} className="bg-[#006d49] rounded-2xl font-semibold max-sm:hidden text-white hover:bg-[#60a969] transition-all duration-300 py-2 px-4
             ]">
                 <h1>Iniciar Sesión</h1>
             </button>
